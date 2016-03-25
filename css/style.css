@@ -1,0 +1,60 @@
+.contenedor
+{
+  width:800px;
+  height:560px;
+  display:inline-block;  
+}
+.escenario
+{
+  border-radius:5px;
+  box-shadow:0px 5px 30px ;
+  width:501px;
+  height:551px;
+  display:inline-block;  
+}
+.puntos
+{
+  border-radius:5px;
+  box-shadow:0px 5px 30px ;
+  width:100px;
+  height:551px;
+  display:inline-block;  
+  text-align:center;
+  color:#000;
+}
+
+.cabecera
+{
+  background-color:#f93;
+  border-radius: 5px;
+  box-shadow:0px 5px 30px ;
+  text-align:center;
+  margin-bottom:1px;
+  width:606px;
+}
+.cabecera h1
+{
+  font-size:25px;
+  text-shadow: 1px 2px 4px #000;
+  color:#fff;
+}
+.jugador 
+{
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  background: -webkit-radial-gradient(at top left, #FA2832 20%, #370C0E);
+  background: radial-gradient(at top left, #FA2832 20%, #370C0E);
+  border-radius: 15px;
+  box-shadow:2px 5px 15px ;
+}
+.enemigo 
+{
+  width: 30px;
+  height: 30px;
+  background-color: blue;
+  background: -webkit-radial-gradient(at top left, #442FFF 12%, #000715);
+  background: radial-gradient(at top left, #442FFF 12%, #000715);
+  border-radius: 15px;
+  box-shadow:2px 5px 15px ;
+}
