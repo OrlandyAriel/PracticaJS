@@ -1,11 +1,16 @@
-var jugador = document.getElementById('jugador');
-var enemigo = document.getElementById('enemigo');
+var jugador ="";
+var escenario = document.getElementById('escenario')
+var enemigo="";
 var puntuacion = document.getElementById('puntos');
 var puntos = 0;
 var direccionX = 1; //derecha = 1, izquierda = 2
 var direccionY = 1; //arriba= 1, abajo = abajo
 var incr_x;
 var incr_y;
+var tiempoInicio = 0;
+var tiempoRandom = 0; //variable para sacar de quicio
+//tiempo = Math.floor(Math.random() * (300000-1)+1);genero un número aleatorio entre 1 y 300000, estos serán milisegundos, que dirá el tiempo que dure jugando el jugador
+
 //instrucciones para el jugador
 alert("Usa las teclas de dirección para jugar");
 // Actualizamos la ubicación del objeto
@@ -59,7 +64,6 @@ function posicionEnemigo(element, incx, incy) {
   element.setAttribute('data-y', y);
   colision();
 }
-
 //Fución que controla que ningún jugador salga del escenario
 function recinto(x, y) {
   var bandera = true;
@@ -97,6 +101,37 @@ window.addEventListener('keydown', function(e) {
   }
   colision();
 });
+function inicioFastidio()
+{
+  puntos = 0;
+  tiempoInicio = new Date();
+  tiempoRandom = Math.floor(Math.random() * (300000-1000)+1);
+}
+function fastidiar()
+{
+  var tiempoTrans = new Date();
+  var t_a = tiempoInicio.getTime();
+  var t_b = tiempoTrans.getTime();
+  var dif = Math.abs(t_a - t_b);
+  if(dif >= tiempoRandom)
+    {
+      var cont = notificacion(puntos);
+      if(cont == false)
+        {
+          window.clearInterval(id1);
+          window.clearInterval(id2);
+        }
+      else
+        {
+          inicioFastidio();
+          id1;
+        }
+    }
+}
+function notificacion(puntos){
+  
+  return confirm("Haz logrado:"+puntos+" puntos");
+}
 //Fución para mover el jugador enemigo
 function movimientoEnemigo() {
   var px = Number(jugador.getAttribute('data-x'));
@@ -119,22 +154,48 @@ function colision()
 {
   var px = Number(jugador.getAttribute('data-x'));
   var py = Number(jugador.getAttribute('data-y'));
-
+  var pw = jugador.offsetWidth;
+  var ph = jugador.offsetHeight;
   var ex = Number(enemigo.getAttribute('data-x'));
   var ey = Number(enemigo.getAttribute('data-y'));
-  
+  var ew = enemigo.offsetWidth;
+  var eh = enemigo.offsetHeight;
   var difX = Math.abs(ex - px);
   var difY = Math.abs(ey - py);
   
-  if( difX < 10 && difY < 10)
+  /**********/
+  if((px+pw) > ex &&
+    px < (ex+ew)&&
+    py< (ey+eh) &&
+    (py+ph) > ey)
     {
-      //console.log ("px:"+ px+" py:"+py+" ex:"+ex+" ey:"+ey);
+      var posX = Math.floor(Math.random() * (400-1)+1);
+      var posY = Math.floor(Math.random() * (400-1)+1);
+      escenario.removeChild(enemigo);
+      crearEnemigo();
+      posicionEnemigo(enemigo, posX, posY);
       puntos+=10;
-      console.log(puntos)
     }
   puntuacion.innerHTML = puntos;    
 }
+function crearEnemigo()
+{
+  enemigo = document.createElement('div'); /*'<div id="enemigo" class="enemigo"></div>';*/
+  enemigo.className = "enemigo";
+  escenario.appendChild(enemigo);
+}
+function crearJugador()
+{
+  jugador = document.createElement('div'); /*'<div id="enemigo" class="enemigo"></div>';*/
+  jugador.className = "jugador";
+  escenario.appendChild(jugador);
+}
 // Inicialización
+crearEnemigo();
+crearJugador();
 posicionJugador(jugador, 250, 400);
 posicionEnemigo(enemigo, 60, 200);
-setInterval(function() { movimientoEnemigo() },10) ;
+inicioFastidio();
+var id1=setInterval(function() { movimientoEnemigo() },15);
+var id2=setInterval(function() { fastidiar() },10);
+
