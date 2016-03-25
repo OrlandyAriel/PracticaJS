@@ -1,6 +1,7 @@
 var jugador ="";
-var escenario = document.getElementById('escenario')
 var enemigo="";
+var escenario = document.getElementById('escenario')
+
 var puntuacion = document.getElementById('puntos');
 var puntos = 0;
 var direccionX = 1; //derecha = 1, izquierda = 2
@@ -118,6 +119,8 @@ function fastidiar()
       var cont = notificacion(puntos);
       if(cont == false)
         {
+          eleminarPersonaje(jugador);
+          eleminarPersonaje(enemigo);
           window.clearInterval(id1);
           window.clearInterval(id2);
         }
@@ -152,18 +155,17 @@ function movimientoEnemigo() {
 //Función que controla las coliciones entre el enemigo y el jugador
 function colision()
 {
+  //posiciones(x,y) del jugador y el ancho(Width) y alto(Height)
   var px = Number(jugador.getAttribute('data-x'));
   var py = Number(jugador.getAttribute('data-y'));
   var pw = jugador.offsetWidth;
   var ph = jugador.offsetHeight;
+  //posiciones(x,y) del enemigo y el ancho(Width) y alto(Height)
   var ex = Number(enemigo.getAttribute('data-x'));
   var ey = Number(enemigo.getAttribute('data-y'));
   var ew = enemigo.offsetWidth;
   var eh = enemigo.offsetHeight;
-  var difX = Math.abs(ex - px);
-  var difY = Math.abs(ey - py);
   
-  /**********/
   if((px+pw) > ex &&
     px < (ex+ew)&&
     py< (ey+eh) &&
@@ -171,12 +173,12 @@ function colision()
     {
       var posX = Math.floor(Math.random() * (400-1)+1);
       var posY = Math.floor(Math.random() * (400-1)+1);
-      escenario.removeChild(enemigo);
+      eleminarPersonaje(enemigo)
       crearEnemigo();
       posicionEnemigo(enemigo, posX, posY);
       puntos+=10;
     }
-  puntuacion.innerHTML = puntos;    
+  puntuacion.innerHTML ="<b>Puntos:"+ puntos+"</b>";    
 }
 function crearEnemigo()
 {
@@ -190,6 +192,10 @@ function crearJugador()
   jugador.className = "jugador";
   escenario.appendChild(jugador);
 }
+function eleminarPersonaje(elemn)
+{
+  escenario.removeChild(elemn);
+}
 // Inicialización
 crearEnemigo();
 crearJugador();
@@ -198,4 +204,3 @@ posicionEnemigo(enemigo, 60, 200);
 inicioFastidio();
 var id1=setInterval(function() { movimientoEnemigo() },15);
 var id2=setInterval(function() { fastidiar() },10);
-
