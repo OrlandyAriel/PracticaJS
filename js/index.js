@@ -13,7 +13,10 @@ var tiempoRandom = 0; //variable para sacar de quicio
 //tiempo = Math.floor(Math.random() * (300000-1)+1);genero un número aleatorio entre 1 y 300000, estos serán milisegundos, que dirá el tiempo que dure jugando el jugador
 
 //instrucciones para el jugador
-alert("Usa las teclas de dirección para jugar");
+function instrucciones()
+{
+  alert("El juego consiste en atrapar el círculo azul, por tanto, eres el círculo rojo. \n\n  *Suma puntos cada vez que lo atrapes.\n\n  *El jugo tiene un tiempo limitado y aleatorio para cada partida.\n\n\n ****SUERTE O NO****");
+}
 // Actualizamos la ubicación del objeto
 function posicionJugador(element, incx, incy) {
   var x = Number(element.getAttribute('data-x')) + incx;
@@ -204,3 +207,4 @@ posicionEnemigo(enemigo, 60, 200);
 inicioFastidio();
 var id1=setInterval(function() { movimientoEnemigo() },15);
 var id2=setInterval(function() { fastidiar() },10);
+

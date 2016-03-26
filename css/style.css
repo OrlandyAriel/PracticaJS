@@ -38,13 +38,22 @@
   text-shadow: 1px 2px 4px #000;
   color:#fff;
 }
+.cabecera span
+{
+  font-size:15px;
+  text-shadow: 1px 2px 4px #000;
+  color:#FFF;
+}
 .jugador 
 {
   width: 30px;
   height: 30px;
   background-color: red;
-  background: -webkit-radial-gradient(at top left, #FA2832 20%, #370C0E);
   background: radial-gradient(at top left, #FA2832 20%, #370C0E);
+  -ms-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -o-border-radius: 15px;
   border-radius: 15px;
   box-shadow:2px 5px 15px ;
 }
@@ -53,8 +62,11 @@
   width: 30px;
   height: 30px;
   background-color: blue;
-  background: -webkit-radial-gradient(at top left, #442FFF 12%, #000715);
   background: radial-gradient(at top left, #442FFF 12%, #000715);
+  -ms-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -o-border-radius: 15px;
   border-radius: 15px;
   box-shadow:2px 5px 15px ;
 }
