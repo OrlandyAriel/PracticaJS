@@ -1,7 +1,8 @@
 var jugador ="";
 var enemigo="";
+var audioPunto = new Audio("http://www.sonidosmp3gratis.com/sounds/cartoon130");
+var audioFinPartida = new Audio("http://www.sonidosmp3gratis.com/sounds/008769568_prev");
 var escenario = document.getElementById('escenario')
-
 var puntuacion = document.getElementById('puntos');
 var puntos = 0;
 var direccionX = 1; //derecha = 1, izquierda = 2
@@ -15,10 +16,11 @@ var tiempoRandom = 0; //variable para sacar de quicio
 //instrucciones para el jugador
 function instrucciones()
 {
-  alert("El juego consiste en atrapar el círculo azul, por tanto, eres el círculo rojo. \n\n  *Suma puntos cada vez que lo atrapes.\n\n  *El jugo tiene un tiempo limitado y aleatorio para cada partida.\n\n\n ****SUERTE O NO****");
+  alert("El juego consite en atrapar el circulo azul,\npor tanto eres el circulo rojo.\n\n  *Suma puntos cada vez que lo atrapes.\n\n  *El jugo tiene un tiempo limitado y aleatorio para cada partida");
 }
 // Actualizamos la ubicación del objeto
-function posicionJugador(element, incx, incy) {
+function posicionJugador(element, incx, incy) 
+{
   var x = Number(element.getAttribute('data-x')) + incx;
   var y = Number(element.getAttribute('data-y')) + incy;
   if (recinto(x, y) == true) {
@@ -28,7 +30,8 @@ function posicionJugador(element, incx, incy) {
   }
   colision();
 }
-function posicionEnemigo(element, incx, incy) {
+function posicionEnemigo(element, incx, incy) 
+{
   var x = Number(element.getAttribute('data-x'));
   var y = Number(element.getAttribute('data-y'));
   if(direccionX==1)
@@ -69,7 +72,8 @@ function posicionEnemigo(element, incx, incy) {
   colision();
 }
 //Fución que controla que ningún jugador salga del escenario
-function recinto(x, y) {
+function recinto(x, y)
+{
   var bandera = true;
   if (x < 0)
     bandera = false;
@@ -120,6 +124,7 @@ function fastidiar()
   if(dif >= tiempoRandom)
     {
       var cont = notificacion(puntos);
+      sonido(2);
       if(cont == false)
         {
           eleminarPersonaje(jugador);
@@ -134,12 +139,13 @@ function fastidiar()
         }
     }
 }
-function notificacion(puntos){
-  
+function notificacion(puntos)
+{
   return confirm("Haz logrado:"+puntos+" puntos");
 }
 //Fución para mover el jugador enemigo
-function movimientoEnemigo() {
+function movimientoEnemigo() 
+{
   var px = Number(jugador.getAttribute('data-x'));
   var py = Number(jugador.getAttribute('data-y'));
 
@@ -180,6 +186,7 @@ function colision()
       crearEnemigo();
       posicionEnemigo(enemigo, posX, posY);
       puntos+=10;
+      sonido(1);
     }
   puntuacion.innerHTML ="<b>Puntos:"+ puntos+"</b>";    
 }
@@ -198,6 +205,18 @@ function crearJugador()
 function eleminarPersonaje(elemn)
 {
   escenario.removeChild(elemn);
+}
+function sonido(efect)
+{
+  if(efect == 1)
+  {
+    audioPunto.play();
+  }
+  else if(efect == 2)
+  {
+    audioFinPartida.play();
+  }
+    
 }
 // Inicialización
 crearEnemigo();
