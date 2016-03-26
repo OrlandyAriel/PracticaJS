@@ -16,7 +16,7 @@ var tiempoRandom = 0; //variable para sacar de quicio
 //instrucciones para el jugador
 function instrucciones()
 {
-  alert("El juego consite en atrapar el circulo azul,\npor tanto eres el circulo rojo.\n\n  *Suma puntos cada vez que lo atrapes.\n\n  *El jugo tiene un tiempo limitado y aleatorio para cada partida");
+  alert("El juego consiste en atrapar el círculo azul, por tanto, eres el círculo rojo. \n\n  *Suma puntos cada vez que lo atrapes.\n\n  *El jugo tiene un tiempo limitado y aleatorio para cada partida.\n\n\n ****SUERTE O NO****");
 }
 // Actualizamos la ubicación del objeto
 function posicionJugador(element, incx, incy) 
