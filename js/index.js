@@ -123,8 +123,8 @@ function fastidiar()
   var dif = Math.abs(t_a - t_b);
   if(dif >= tiempoRandom)
     {
+	  sonido(2);
       var cont = notificacion(puntos);
-      sonido(2);
       if(cont == false)
         {
           eleminarPersonaje(jugador);
